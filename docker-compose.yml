@@ -1,21 +1,29 @@
 version: '2.1'
 
 volumes:
-  media:
-    driver_opts:
-       device: :/media/usb
   config:
 
 services:
+
+  router:
+    image: arm32v6/traefik
+    ports:
+      - '80:80'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    command: --docker
 
   web:
     image: kapturebox/web:latest-arm
     volumes:
       - config:/config
-      - media:/media
+      - /media/usb:/media
     environment:
+      SERVER_ENDPOINT: ''
+      TRANSMISSION_HOST: transmission
       TRANSMISSION_USER: admin
       TRANSMISSION_PASS: password
+      FLEXGET_HOST: flexget
       FLEXGET_USERNAME: flexget
       FLEXGET_PASSWORD: mySuperPassword
       KAPTURE_DOWNLOAD_PATH: /media
@@ -24,7 +32,11 @@ services:
       # NODE_DEBUG: request
       # FLEXGET_API_TOKEN:
     ports:
-      - '9000:9000'
+      - '8080:8080'
+    labels:
+      traefik.enable: 'true'
+      traefik.port: '8080'
+      traefik.frontend.rule: PathPrefix:/
 
   transmission:
     image: lsioarmhf/transmission:latest
@@ -37,7 +49,7 @@ services:
       TRPASSWD: password
       USERID: 0
     volumes:
-      - media:/media
+      - /media/usb:/media
 
   flexget:
     image: gaieges/flexget:latest
@@ -55,10 +67,16 @@ services:
       TRANSMISSION_PASS: password
       FLEXGET_USERNAME: flexget
       FLEXGET_PASSWORD: mySuperPassword
+    labels:
+      traefik.enable: 'true'
+      traefik.port: '9000'
+      traefik.frontend.rule: 'PathPrefix:/api/'
+
 
   plex:
     image: jaymoulin/plex:latest
+    network_mode: host
     ports:
       - '32400:32400'
     volumes:
-      - media:/media
+      - /media/usb:/media
