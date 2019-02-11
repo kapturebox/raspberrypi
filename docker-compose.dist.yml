@@ -1,0 +1,7 @@
+version: '2.3'
+
+services:
+  kapture:
+    build:
+      context: .
+      target: dist
