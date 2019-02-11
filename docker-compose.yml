@@ -7,7 +7,7 @@ volumes:
 services:
 
   web:
-    image: kapturebox/web:latest
+    image: kapturebox/web:latest-arm
     volumes:
       - config:/config
       - media:/media
