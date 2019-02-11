@@ -2,6 +2,8 @@ version: '2.1'
 
 volumes:
   media:
+    driver_opts:
+       device: :/media/usb
   config:
 
 services:
@@ -47,7 +49,7 @@ services:
   server:
     image: kapturebox/server:latest-arm
     ports:
-      - "8080:8080"
+      - "9000:9000"
     environment:
       TRANSMISSION_USER: admin
       TRANSMISSION_PASS: password
