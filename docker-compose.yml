@@ -52,7 +52,7 @@ services:
       - /media/usb:/media
 
   flexget:
-    image: gaieges/flexget:latest
+    image: gaieges/flexget:latest-arm
     environment:
       FLEXGET_PASSWORD: mySuperPassword
     ports:
