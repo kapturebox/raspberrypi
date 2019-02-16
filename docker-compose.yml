@@ -16,7 +16,6 @@ services:
   web:
     image: kapturebox/web:latest-arm
     volumes:
-      - config:/config
       - /media/usb:/media
     environment:
       SERVER_ENDPOINT: ''
@@ -60,6 +59,8 @@ services:
 
   server:
     image: kapturebox/server:latest-arm
+    volumes:
+      - config:/config
     ports:
       - "9000:9000"
     environment:
