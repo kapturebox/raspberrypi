@@ -4,9 +4,9 @@ volumes:
   config:
 
 services:
-
   router:
     image: arm32v6/traefik
+    restart: always
     ports:
       - '80:80'
     volumes:
@@ -15,6 +15,7 @@ services:
 
   web:
     image: kapturebox/web:latest-arm
+    restart: always
     volumes:
       - /media/usb:/media
     environment:
@@ -39,6 +40,7 @@ services:
 
   transmission:
     image: jaymoulin/transmission
+    restart: always
     ports:
       - '51413:51413'
       - '51413:51413/udp'
@@ -52,6 +54,7 @@ services:
 
   flexget:
     image: gaieges/flexget:latest-arm
+    restart: always
     environment:
       FLEXGET_PASSWORD: mySuperPassword
     ports:
@@ -59,6 +62,7 @@ services:
 
   server:
     image: kapturebox/server:latest-arm
+    restart: always
     volumes:
       - config:/config
     ports:
@@ -73,9 +77,9 @@ services:
       traefik.port: '9000'
       traefik.frontend.rule: 'PathPrefix:/api/'
 
-
   plex:
     image: jaymoulin/plex:latest
+    restart: always
     network_mode: host
     ports:
       - '32400:32400'
