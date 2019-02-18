@@ -16,8 +16,6 @@ services:
   web:
     image: kapturebox/web:latest-arm
     restart: always
-    volumes:
-      - /media/usb:/media
     environment:
       SERVER_ENDPOINT: ''
     ports:
@@ -39,7 +37,7 @@ services:
       PASSWORD: password
       USERID: 0
     volumes:
-      - /media/usb:/output
+      - /media/usb:/media
 
   flexget:
     image: gaieges/flexget:latest-arm
@@ -54,6 +52,7 @@ services:
     restart: always
     volumes:
       - config:/config
+      - /media/usb:/media
     ports:
       - "9000:9000"
     environment:
