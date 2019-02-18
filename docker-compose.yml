@@ -64,7 +64,7 @@ services:
       FLEXGET_PASSWORD: mySuperPassword
       KAPTURE_DOWNLOAD_PATH: /media
       KAPTURE_CONFIG_PATH: /config
-      KAPTURE_PLUGIN_STORE: /config/pluginStateStore
+      KAPTURE_STATE_STORE: /config/pluginStateStore
     labels:
       traefik.enable: 'true'
       traefik.port: '9000'
