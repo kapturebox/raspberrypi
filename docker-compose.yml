@@ -77,4 +77,5 @@ services:
     ports:
       - '32400:32400'
     volumes:
-      - /media/usb:/Application Support/Plex Media Server
+      - /media/usb/plex:/Application Support/Plex Media Server
+      - /media/usb:/media
