@@ -46,6 +46,8 @@ services:
       FLEXGET_PASSWORD: mySuperPassword
     ports:
       - "5050:5050"
+    volumes:
+      -
 
   server:
     image: kapturebox/server:latest-arm
@@ -77,4 +79,4 @@ services:
     ports:
       - '32400:32400'
     volumes:
-      - /media/usb:/media
+      - /media/usb:/Application Support/Plex Media Server
