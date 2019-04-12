@@ -46,8 +46,6 @@ services:
       FLEXGET_PASSWORD: mySuperPassword
     ports:
       - "5050:5050"
-    volumes:
-      -
 
   server:
     image: kapturebox/server:latest-arm
