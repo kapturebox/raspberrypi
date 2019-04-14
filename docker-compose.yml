@@ -25,28 +25,6 @@ services:
       traefik.port: '8080'
       traefik.frontend.rule: PathPrefix:/
 
-  transmission:
-    image: jaymoulin/transmission
-    restart: always
-    ports:
-      - '51413:51413'
-      - '51413:51413/udp'
-      - '9091:9091'
-    environment:
-      USERNAME: admin
-      PASSWORD: password
-      USERID: 0
-    volumes:
-      - /media/usb:/media
-
-  flexget:
-    image: gaieges/flexget:latest-arm
-    restart: always
-    environment:
-      FLEXGET_PASSWORD: mySuperPassword
-    ports:
-      - "5050:5050"
-
   server:
     image: kapturebox/server:latest-arm
     restart: always
@@ -69,6 +47,32 @@ services:
       traefik.enable: 'true'
       traefik.port: '9000'
       traefik.frontend.rule: 'PathPrefix:/api/'
+
+######## Support
+
+  transmission:
+    image: jaymoulin/transmission
+    restart: always
+    ports:
+      - '51413:51413'
+      - '51413:51413/udp'
+      - '9091:9091'
+    environment:
+      USERNAME: admin
+      PASSWORD: password
+      USERID: 0
+    volumes:
+      - /media/usb:/media
+
+  flexget:
+    image: gaieges/flexget:latest-arm
+    restart: always
+    environment:
+      FLEXGET_PASSWORD: mySuperPassword
+    ports:
+      - "5050:5050"
+    volumes:
+      - config:/config
 
   plex:
     image: jaymoulin/plex:latest
