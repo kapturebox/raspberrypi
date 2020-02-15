@@ -5,7 +5,7 @@ volumes:
 
 services:
   router:
-    image: arm32v6/traefik
+    image: traefik:1.7-alpine
     restart: always
     ports:
       - '80:80'
@@ -51,16 +51,16 @@ services:
 ######## Support
 
   transmission:
-    image: jaymoulin/transmission
+    image: linuxserver/transmission
     restart: always
     ports:
       - '51413:51413'
       - '51413:51413/udp'
       - '9091:9091'
     environment:
-      USERNAME: admin
-      PASSWORD: password
-      USERID: 0
+      USER: admin
+      PASS: password
+      PUID: 0
     volumes:
       - /media/usb:/media
 
