@@ -51,7 +51,7 @@ services:
 ######## Support
 
   transmission:
-    image: linuxserver/transmission
+    image: linuxserver/transmission:3.00-r0-ls70
     restart: always
     ports:
       - '51413:51413'
@@ -62,6 +62,7 @@ services:
       PASS: password
       PUID: 0
     volumes:
+      - config:/config
       - /media/usb:/media
 
   flexget:
